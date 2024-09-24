@@ -1,0 +1,6 @@
+Nessa aula, tive uma introdução a views, e tambem instalamos a engine
+ejs, para podemos trabalhar com templates que seria um html com função
+Javascript.
+
+criar o ejs no terminal
+npm i ejs

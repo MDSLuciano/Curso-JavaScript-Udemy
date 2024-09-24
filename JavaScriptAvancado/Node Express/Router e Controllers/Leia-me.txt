@@ -1,0 +1,4 @@
+Nessa aula estamos separando os gets e posts e colocando ele em rotas
+para assim ter um entendimento como funciona a rotas, basicamente importamos
+a função dos nossos controllers para o nosso route, e no arquivo do
+servidor chamamos a função route com o "use"
