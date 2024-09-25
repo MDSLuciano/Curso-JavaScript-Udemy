@@ -1,0 +1,12 @@
+Fizemos a configuração do banco de dados, e agora iremos configurar o mongo
+na nossa aplicação, com isso para ser uma boa prática, iremos instalar uma
+configuração que não vai deixar nossa senha aparecer
+
+npm install dotenv
+
+Para fazer a modelagem iremos usar o mongoose.Ele que irá fazer a verificação
+dos dados que será mandado para o servidor.
+
+npm install mongoose
+
+Para isso iremos fazer algumas alterações no server.js
