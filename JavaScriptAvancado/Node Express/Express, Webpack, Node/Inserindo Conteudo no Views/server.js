@@ -9,7 +9,7 @@ mongoose.connect(process.env.CONNECTIONSTRING)//Fazendo a conexão com o banco d
     }).catch(e => console.log(e))
 
 const session = require('express-session')
-const MongoStore = require('connect-mongo');
+const MongoStore = require('connect-mongo')(session)
 const flash = require('connect-flash')
 
 const routes = require('./routes')
@@ -21,7 +21,7 @@ app.use(express.static(path.resolve(__dirname, "public")))//Definindo a pasta pa
 //Configurando o cookie
 const sessionOptions = session({
     secret: 'jfnedwbvcudwbiub   wibjadopdjoasdjpaojs',
-    store: MongoStore.create({ mongoUrl: process.env.CONNECTIONSTRING }),
+    store: new MongoStore({ mongooseConnection: mongoose.connection }),
     resave: false, 
     saveUninitialized: false,
     cookie:{
