@@ -1,0 +1,6 @@
+As questões que iremos tratar e a segurança do nosso código, evitar que
+pessoas com intenções maliciosas tentem mandar um post por exemplo com 
+coisas que irá quebrar meu site, para isso iremos instalar um pacote.
+
+npm i helmet
+npm i csurf

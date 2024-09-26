@@ -2,21 +2,23 @@ require('dotenv').config()
 const express = require('express')
 const app = express()
 const mongoose = require('mongoose')
-
 mongoose.connect(process.env.CONNECTIONSTRING)//Fazendo a conexão com o banco de dados do Mongoose
     .then(()=> {
         app.emit('pronto')//Serve para a aplicação funcionar somente depois que o Mongoose conectar, porque ele demora um certo tempo até ser iniciado
     }).catch(e => console.log(e))
-
 const session = require('express-session')
 const MongoStore = require('connect-mongo')
 const flash = require('connect-flash')
-
 const routes = require('./routes')
 const path = require('path')//serve quando temos aplicações em sistema operacionais diferentes, desse jeito ele corrige o caminho
-const { middlewareGlobal } = require('./src/middlewares/middleware')
+const helmet = require('helmet')
+const csrf = require('csurf')
+const { middlewareGlobal, checkCsrfError, csrfMiddleware } = require('./src/middlewares/middleware')
+
+app.use(helmet())
 
 app.use(express.urlencoded({ extended:true }))
+app.use(express.json())
 app.use(express.static(path.resolve(__dirname, "public")))//Definindo a pasta padrão para a visualização do cliente
 
 //Configurando o cookie
@@ -37,6 +39,9 @@ app.use(flash())
 app.set('views', path.resolve(__dirname,'src', 'views'))//.set serve para setar a pasta com o que queremos trabalhar nela.
 app.set('view engine', 'ejs')
 
+app.use(csrf)//Sistema de proteção
+app.use(checkCsrfError)
+app.use(csrfMiddleware)
 // Nossos próprios middlewares
 app.use(middlewareGlobal)
 app.use(routes)//Para usar a minha aplicação na pasta routes

@@ -1,0 +1,15 @@
+<% Controle de fluxo(if, for) %>
+<%= Imprime escapando caracteres %>
+<%- Imprime sem escapar caracteres %>
+<%# Comentário %>
+<%- include('CAMINHO/ARQUIVO') %>
+
+Exemplo utilizando o for, temos sempre que ter uma abertura e fechamento
+nas condicionais em cada linha, e se atentar no fechamento das chaves deve
+haver também o fechamento do ejs.
+
+<% if(alguma coisa){ %>
+    <%= exibe alguma coisa %>
+<% } if(alguma coisa){ %>
+    <%= exibe outra coisa %>
+<% } %>
