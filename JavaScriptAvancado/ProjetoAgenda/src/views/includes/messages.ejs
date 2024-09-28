@@ -14,12 +14,13 @@
 <% if(sucess.length > 0) { %>
     <div class="col">
         <div class="col my-3">
-            <div class="bg-sucess" role="alert">
+            <div class="alert alert-success">
                 <ul class="m-0">
                     <% sucess.forEach(sucess => { %>
                         <li><%= sucess %></li>
                     <% }) %>
                 </ul>
+            </div>
         </div>
     </div>
 <% } %>
