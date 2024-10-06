@@ -2,7 +2,8 @@ const mongoose = require('mongoose')
 const validator = require('validator')//biblioteca para validar os dados
 const bcryptjs = require('bcryptjs')//biblioteca para criptografar os dados
 
-const LoginSchema = new mongoose.Schema({     //Criando o Schema do mongoose para fazer os tratamentos dos dados
+//Criando o Schema do mongoose para fazer os tratamentos dos dados
+const LoginSchema = new mongoose.Schema({ 
     email: { type:String, required: true},
     password: { type:String, required: true}
 })
@@ -17,6 +18,25 @@ class Login {
         this.user = null
     }
 
+    async login(){
+        this.valida()
+        if(this.errors.length > 0) return
+        this.user = await LoginModel.findOne({email: this.body.email})
+        
+        if(!this.user) {
+            this.errors.push('Usuário não existe')
+            return
+        }
+
+        if(!bcryptjs.compareSync(this.body.password, this.user.password)){
+            this.errors.push('Senha inválida')
+            this.user = null
+            return
+        }
+    }
+
+
+
 //Essa função vai registrar o usuário, mas para isso ela irá esperar o
 //método de validação.
     async register() {
@@ -30,17 +50,15 @@ class Login {
         const salt = bcryptjs.genSaltSync()//Gerando o hash da senha
         this.body.password = bcryptjs.hashSync(this.body.password, salt)//Criptografando a senha
 
-        try{
-            this.user = await LoginModel.create(this.body)
-        }catch(e) {
-            console.log(e)
-        }
+
+        this.user = await LoginModel.create(this.body)
     }
     
     async userExists() {
         this.user = await LoginModel.findOne({email: this.body.email})
         if(this.user) this.errors.push('E-mail ja existe')
     }
+
     valida(){
         this.cleanUp()
         // Validação
