@@ -11,7 +11,7 @@ export default function Login() {
         <small>paeg</small>
       </h1>
       </Title>
-      <Paragrafo>Lorem ipsum</ Paragrafo>
+      <Paragrafo>Lorem ipsum dolor sit amet</ Paragrafo>
       <button type="button">Enviar</button>
     </ Container>
   );

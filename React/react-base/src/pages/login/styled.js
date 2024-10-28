@@ -11,5 +11,5 @@ export const Title = styled.h1`
 `
 
 export const Paragrafo = styled.p`
-    font-size: 123pt;
+    font-size: 80pt;
 `
